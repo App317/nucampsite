@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, Text, Button, Modal, View } from 'react-native';
 import { Input, Rating } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import RenderCampsite from '../features/campsites/RenderCampsite';
+import { postComment } from '../features/comments/commentsSlice';
 import { toggleFavorite } from '../features/favorites/favoritesSlice';
 
 const CampsiteInfoScreen = ({ route }) => {
@@ -22,7 +23,7 @@ const CampsiteInfoScreen = ({ route }) => {
       text,
       campsiteId: campsite.id,
     };
-    console.log(newComment);
+    dispatch(postComment(newComment));
     setShowModal(!showModal);
   };
 
@@ -101,11 +102,10 @@ const CampsiteInfoScreen = ({ route }) => {
             onChangeText={(text) => setText(text)}
             value //maxLength or editable={false}?
           />
-          <Button />
           <View style={{ margin: 10 }}>
             <Button
               title="Submit"
-              color={'#5637DD'}
+              color="#5637DD"
               onPress={() => {
                 handleSubmit();
                 resetForm();
