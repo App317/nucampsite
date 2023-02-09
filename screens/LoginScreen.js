@@ -8,6 +8,7 @@ import { baseUrl } from '../shared/baseUrl';
 import logo from '../assets/images/logo.png';
 import * as ImageManipulator from 'expo-image-manipulator';
 import { SaveFormat } from 'expo-image-manipulator';
+import * as MediaLibrary from 'expo-media-library';
 
 const LoginTab = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -150,6 +151,7 @@ const RegisterTab = () => {
       if (!capturedImage.cancelled) {
         console.log(capturedImage);
         processImage(capturedImage.uri);
+        MediaLibrary.saveToLibraryAsync(capturedImage.uri);
       }
     }
   };
